@@ -14,43 +14,34 @@ local hi = function(group)
   return '%#'..group..'#'
 end
 
+local format_count = function(format, count)
+  if not count or count == 0 then
+    return ''
+  end
+  return string.format(format, count)
+end
 local vcs = function()
   local git_info = vim.b.gitsigns_status_dict
   if not git_info or git_info.head == '' then
     return ''
   end
-  local added = git_info.added == 0 and '' or (' +' .. git_info.added)
-  local changed = git_info.changed == 0 and '' or (' ~' .. git_info.changed)
-  local removed = git_info.removed == 0 and '' or (' -' .. git_info.removed)
+  local added = format_count(' +%s', git_info.added)
+  local changed = format_count(' ~%s', git_info.changed)
+  local removed = format_count(' -%s', git_info.removed)
   return table.concat {
-    -- hi('GitSignsAdd'),
     '  '..git_info.head,
-    -- hi('GitSignsAdd'),
     added,
-    -- hi('GitSignsChange'),
     changed,
-    -- hi('GitSignsDelete'),
     removed,
-    -- hi('StatusLine'),
   }
-end
-
-local diagnostic = function(format, severity)
-  local count = #(vim.diagnostic.get(0, { severity = severity }))
-  return count == 0 and '' or string.format(format, count)
 end
 
 local diagnostics = function()
   return table.concat {
-    -- hi('DiagnosticError'),
-    diagnostic(' %s', 'Error'),
-    -- hi('DiagnosticWarn'),
-    diagnostic(' %s', 'Warn'),
-    -- hi('DiagnosticInfo'),
-    diagnostic(' %s', 'Info'),
-    -- hi('DiagnosticHint'),
-    diagnostic(' %s', 'Hint'),
-    -- hi('StatusLine'),
+    format_count(' %s', #(vim.diagnostic.get(0, { severity = 'Error'}))),
+    format_count(' %s', #(vim.diagnostic.get(0, { severity = 'Warn'}))),
+    format_count(' %s', #(vim.diagnostic.get(0, { severity = 'Info'}))),
+    format_count(' %s', #(vim.diagnostic.get(0, { severity = 'Hint'}))),
   }
 end
 
