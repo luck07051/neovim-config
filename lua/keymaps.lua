@@ -5,7 +5,7 @@
 -- Make space as leader key --
 vim.keymap.set('', '<Space>', '<Nop>')
 vim.g.mapleader = ' '
-vim.g.maplocalleader = ' '
+vim.g.maplocalleader = ','
 
 -- Copy paste with clipboard --
 vim.keymap.set('', '<Leader>y', '"+y')
