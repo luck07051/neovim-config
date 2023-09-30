@@ -10,9 +10,6 @@ return { -- File explorer
     view_options = {
       show_hidden = true
     },
-    win_options = {
-      conceallevel = 0
-    },
     keymaps = {
       ["<BS>"] = "actions.parent",
     },
