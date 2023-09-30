@@ -58,7 +58,7 @@ au('TextYankPost', {
 
 -- Settings for terminal mode
 au('TermOpen', { command = 'setlocal nonumber signcolumn=no' })
--- autocmd('TermOpen', { command = 'startinsert' })
+au('TermOpen', { command = 'startinsert' })
 
 -- Only focused window has cursorline
 au('WinEnter', { command = 'setlocal cursorline' })
@@ -73,10 +73,6 @@ au('BufEnter', {
     vim.opt.foldlevel = 0
   end
 })
-  
--- Number line
--- au('InsertEnter', { callback = function() vim.opt_local.relativenumber = false end })
--- au('InsertLeave', { callback = function() vim.opt_local.relativenumber = true end })
 
 -- Correcting the filetype
 local function corrft(pattern, ft)
