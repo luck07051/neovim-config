@@ -30,6 +30,17 @@ vim.keymap.set('', '<Leader>p', '"+p')
 vim.keymap.set('', '<Leader>P', '"+P')
 vim.keymap.set('', '<Leader><Leader>y', 'gg"+yG\'\'')
 
+-- Select the paste
+vim.keymap.set('', 'gp', function()
+  local v = vim.fn.getregtype():sub(1, 1)
+  if v == '' then
+    return ''
+  end
+  -- `:h getregtype`: <C-V> is one character with value 0x16
+  v = v:byte() == 0x16 and '<C-V>' or v
+  return '`[' .. v .. '`]'
+end, { expr = true, desc = 'Select the paste' } )
+
 -- Diagnostic
 vim.keymap.set('n', '<Leader>d', vim.diagnostic.open_float, { desc = 'Show diagnostics in a floating window' } )
 vim.keymap.set('n', '[d',        vim.diagnostic.goto_prev,  { desc = 'Move to the prev diagnostic' } )
