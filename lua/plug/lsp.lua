@@ -2,6 +2,9 @@ local M = {
   'neovim/nvim-lspconfig',
   name = "lsp",
   event = "BufReadPre",
+  dependencies = {
+    { 'folke/neodev.nvim', opts = {} },
+  },
 }
 
 M.config = function()
