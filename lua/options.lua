@@ -7,7 +7,7 @@ vim.opt.number = true
 vim.opt.signcolumn = 'yes'
 vim.opt.cursorline = true
 vim.opt.scrolloff = 5
-vim.opt.conceallevel = 0
+vim.opt.conceallevel = 3
 
 -- Indent --
 vim.opt.autoindent = true
