@@ -18,9 +18,6 @@ vim.keymap.set('t', '<C-[>', '<C-\\><C-n>')
 vim.keymap.set('t', '<C-w>', '<C-\\><C-n><C-w>')
 
 
--- Spacial map just for my custom keyboard
-vim.keymap.set('n', ';', '/')
-
 -- Buffer movement
 vim.keymap.set('n', '<BS>', '<C-^>')
 vim.keymap.set('n', '<Tab>', ':bn<cr>')
