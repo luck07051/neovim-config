@@ -99,6 +99,9 @@ local function cabbrev(lhs, rhs)
   vim.cmd(command:format(lhs, lhs, rhs, lhs))
 end
 
+cabbrev('f', 'find')
+cabbrev('s', 'sp')
+cabbrev('v', 'vs')
+-- Write file as root
 cabbrev('sudow', 'w !sudo tee %')
 cabbrev('doasw', 'w !doas tee %')
-cabbrev('f', 'find')
