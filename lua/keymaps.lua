@@ -60,7 +60,7 @@ vim.keymap.set('n', '<C-n>', '.nzzzv')
 vim.keymap.set('n', '<Leader>sp', ':setlocal spell! spelllang=en_us<CR>')
 
 -- Switch conceal
-vim.keymap.set("n", "<Leader>zc", function()
+vim.keymap.set('n', '<Leader>zc', function()
   vim.o.conceallevel = vim.o.conceallevel > 0 and 0 or 3
 end, { silent = true, desc = 'Toggle conceal' } )
 

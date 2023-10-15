@@ -49,7 +49,7 @@ au('TextYankPost', {
   desc = 'Yank highlighting',
   callback = function()
     vim.highlight.on_yank({
-      higroup = "Yank",
+      higroup = 'Yank',
       timeout = 300,
       priority = 250,
     })

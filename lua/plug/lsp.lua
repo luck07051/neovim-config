@@ -1,7 +1,7 @@
 local M = {
   'neovim/nvim-lspconfig',
-  name = "lsp",
-  event = "BufReadPre",
+  name = 'lsp',
+  event = 'BufReadPre',
   dependencies = {
     { 'folke/neodev.nvim', opts = {} },
   },
@@ -30,7 +30,7 @@ M.config = function()
         },
         workspace = {
           -- Make the server aware of Neovim runtime files
-          library = vim.api.nvim_get_runtime_file("", true),
+          library = vim.api.nvim_get_runtime_file('', true),
           -- Stop asking about working environment on every startup
           checkThirdParty = false,
         },
@@ -58,12 +58,12 @@ M.config = function()
 
   -- Icon define
   local function set_sign(name, text)
-    vim.fn.sign_define('DiagnosticSign'..name, { texthl = 'DiagnosticSign'..name, text = text, numhl = "" })
+    vim.fn.sign_define('DiagnosticSign'..name, { texthl = 'DiagnosticSign'..name, text = text, numhl = '' })
   end
-  set_sign("Error", "")
-  set_sign("Warn", "")
-  set_sign("Hint", "")
-  set_sign("Info", "")
+  set_sign('Error', '')
+  set_sign('Warn', '')
+  set_sign('Hint', '')
+  set_sign('Info', '')
 
   vim.diagnostic.config({
     virtual_text = false,
@@ -72,16 +72,16 @@ M.config = function()
     severity_sort = true,
     float = {
       focusable = false,
-      style = "minimal",
-      border = "rounded",
-      source = "always",
-      header = "",
-      prefix = "",
+      style = 'minimal',
+      border = 'rounded',
+      source = 'always',
+      header = '',
+      prefix = '',
     },
   })
 
-  vim.lsp.handlers["textDocument/hover"]         = vim.lsp.with(vim.lsp.handlers.hover, { border = "rounded", })
-  vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = "rounded", })
+  vim.lsp.handlers['textDocument/hover']         = vim.lsp.with(vim.lsp.handlers.hover, { border = 'rounded', })
+  vim.lsp.handlers['textDocument/signatureHelp'] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = 'rounded', })
 
 
   local on_attach = function(client, bufnr)
@@ -126,7 +126,7 @@ M.config = function()
     capabilities = vim.lsp.protocol.make_client_capabilities()
   end
 
-  -- local language_servers = require("lspconfig").util.available_servers()
+  -- local language_servers = require('lspconfig').util.available_servers()
   for server, settings in pairs(server_settings) do
     lspconfig[server].setup {
       on_attach = on_attach,

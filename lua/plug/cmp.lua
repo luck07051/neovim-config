@@ -14,7 +14,7 @@ local M = {
     'hrsh7th/cmp-nvim-lua',
     'kdheepak/cmp-latex-symbols',
 
-    "hrsh7th/cmp-nvim-lsp",
+    'hrsh7th/cmp-nvim-lsp',
     'saadparwaiz1/cmp_luasnip',
   },
 }
@@ -25,21 +25,21 @@ M.config = function()
 
   cmp.setup {
     mapping = {
-      ["<C-n>"] = cmp.mapping.select_next_item(),
-      ["<C-p>"] = cmp.mapping.select_prev_item(),
-      ["<C-e>"] = cmp.mapping.abort(),
+      ['<C-n>'] = cmp.mapping.select_next_item(),
+      ['<C-p>'] = cmp.mapping.select_prev_item(),
+      ['<C-e>'] = cmp.mapping.abort(),
       ['<CR>'] = cmp.mapping.confirm({ select = false }),
-      ["<C-y>"] = cmp.mapping(
+      ['<C-y>'] = cmp.mapping(
         cmp.mapping.confirm {
           behavior = cmp.ConfirmBehavior.Insert,
           select = true,
-        }, { "i", "c" }),
-      ["<C-x>"] = cmp.mapping.close(),
+        }, { 'i', 'c' }),
+      ['<C-x>'] = cmp.mapping.close(),
       ['<C-d>'] = cmp.mapping.scroll_docs(-4),
       ['<C-f>'] = cmp.mapping.scroll_docs(4),
 
-      -- ["<Tab>"] = cmp.mapping.select_next_item(),
-      -- ["<S-Tab>"] = cmp.mapping.select_prev_item(),
+      -- ['<Tab>'] = cmp.mapping.select_next_item(),
+      -- ['<S-Tab>'] = cmp.mapping.select_prev_item(),
     },
 
     sources = {
@@ -69,7 +69,7 @@ M.config = function()
         side_padding = 1,
       },
       documentation = {
-        border = { " " },
+        border = { ' ' },
       },
     },
 
@@ -107,7 +107,7 @@ M.config = function()
     }),
 
     formatting = {
-      fields = { "abbr" },
+      fields = { 'abbr' },
     },
   })
 
@@ -120,7 +120,7 @@ M.config = function()
     },
 
     formatting = {
-      fields = { "abbr" },
+      fields = { 'abbr' },
     }
   })
 

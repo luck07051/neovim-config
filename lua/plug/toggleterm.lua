@@ -13,16 +13,16 @@ return {
   opts = {
     size = 20,
     open_mapping = [[<c-t>]],
-    direction = "float",
+    direction = 'float',
     highlights = {
       Normal = {
-        link = "Normal",
+        link = 'Normal',
       },
       NormalFloat = {
         link = 'NormalFloat'
       },
       FloatBorder = {
-        link = "FloatBorder",
+        link = 'FloatBorder',
       },
     },
   }

@@ -17,21 +17,21 @@ return {
 
   config = function()
     local ls = require('luasnip')
-    local types = require("luasnip.util.types")
-    local ft_fn = require("luasnip.extras.filetype_functions")
+    local types = require('luasnip.util.types')
+    local ft_fn = require('luasnip.extras.filetype_functions')
 
     ls.setup({
       history = true,
       updateevents = 'TextChanged,TextChangedI',
-      delete_check_events = "TextChanged",
+      delete_check_events = 'TextChanged',
       enable_autosnippets = true,
-      store_selection_keys = "<Tab>",
+      store_selection_keys = '<Tab>',
       ft_func = ft_fn.from_pos_or_filetype,
 
       ext_opts = {
         [types.choiceNode] = {
           active = {
-            virt_text = { { "●", "MatchParen" } },
+            virt_text = { { '●', 'MatchParen' } },
           },
         },
       },

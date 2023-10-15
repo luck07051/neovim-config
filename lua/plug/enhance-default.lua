@@ -11,13 +11,13 @@ return {
     },
 
     config = function()
-      local augend = require("dial.augend")
+      local augend = require('dial.augend')
       require('dial.config').augends:register_group{
         default = {
           augend.integer.alias.decimal_int,
           augend.integer.alias.hex,
           augend.constant.alias.bool,
-          augend.date.alias["%Y/%m/%d"],  -- date (2022/02/19, etc.)
+          augend.date.alias['%Y/%m/%d'],  -- date (2022/02/19, etc.)
         },
       }
 
@@ -59,8 +59,8 @@ return {
   },
 
   { -- Enhanced matchparen
-    "utilyre/sentiment.nvim",
-    event = "VeryLazy",
+    'utilyre/sentiment.nvim',
+    event = 'VeryLazy',
     opts = { },
   }
 }

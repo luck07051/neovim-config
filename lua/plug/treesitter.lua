@@ -1,6 +1,6 @@
 local M = {
   'nvim-treesitter/nvim-treesitter',
-  event = "BufReadPost",
+  event = 'BufReadPost',
   build = ':TSUpdate',
   dependencies = {
     'nvim-treesitter/playground',
@@ -16,7 +16,7 @@ M.keys = {
 }
 
 M.config = function()
-  local treesitter = require "nvim-treesitter.configs"
+  local treesitter = require 'nvim-treesitter.configs'
 
   treesitter.setup {
     ensure_installed = 'all',
@@ -24,7 +24,7 @@ M.config = function()
 
     highlight = {
       enable = true,
-      disable = { "help" },
+      disable = { 'help' },
     },
 
     indent = {
@@ -39,7 +39,7 @@ M.config = function()
     query_linter = {
       enable = true,
       -- use_virtual_text = true,
-      -- lint_events = { "BufWrite", "CursorHold" },
+      -- lint_events = { 'BufWrite', 'CursorHold' },
     },
   }
 end
