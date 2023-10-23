@@ -30,6 +30,11 @@ vim.keymap.set('', '<Leader>p', '"+p')
 vim.keymap.set('', '<Leader>P', '"+P')
 vim.keymap.set('', '<Leader><Leader>y', 'gg"+yG\'\'')
 
+-- Diagnostic
+vim.keymap.set('n', '<Leader>d', vim.diagnostic.open_float, { desc = 'Show diagnostics in a floating window' } )
+vim.keymap.set('n', '[d',        vim.diagnostic.goto_prev,  { desc = 'Move to the prev diagnostic' } )
+vim.keymap.set('n', ']d',        vim.diagnostic.goto_next,  { desc = 'Move to the next diagnostic' } )
+
 -- Select the paste
 vim.keymap.set('', 'gp', function()
   local v = vim.fn.getregtype():sub(1, 1)
@@ -41,16 +46,19 @@ vim.keymap.set('', 'gp', function()
   return '`[' .. v .. '`]'
 end, { expr = true, desc = 'Select the paste' } )
 
--- Diagnostic
-vim.keymap.set('n', '<Leader>d', vim.diagnostic.open_float, { desc = 'Show diagnostics in a floating window' } )
-vim.keymap.set('n', '[d',        vim.diagnostic.goto_prev,  { desc = 'Move to the prev diagnostic' } )
-vim.keymap.set('n', ']d',        vim.diagnostic.goto_next,  { desc = 'Move to the next diagnostic' } )
-
 -- Center the search
 vim.keymap.set('n', 'n', 'nzzzv')
 vim.keymap.set('n', 'N', 'Nzzzv')
 vim.keymap.set('c', '<CR>', function()
   return vim.fn.getcmdtype() == '/' and '<CR>zzzv' or '<CR>'
+end, { expr = true })
+
+-- Block insert in line visual mode
+vim.keymap.set('x', 'I', function()
+  return vim.fn.mode() == 'V' and '^<C-v>I' or 'I'
+end, { expr = true })
+vim.keymap.set('x', 'A', function()
+  return vim.fn.mode() == 'V' and '$<C-v>A' or 'A'
 end, { expr = true })
 
 -- Redo and search next
