@@ -43,12 +43,9 @@ M.config = function()
     pylsp = {
       pylsp = {
         plugins = {
-          flake8 = {
-            enable = true,
-          },
-          pycodestyle = {
-            maxLineLength = 100,
-          },
+          flake8 = { enabled = true, },
+          pycodestyle = { enabled = false, },
+          pyflakes = { enabled = false, },
         },
       }
     },

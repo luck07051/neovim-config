@@ -96,5 +96,8 @@ return {
   -- TODO: start template
   -- TODO: getopt
   -- TODO: temp file
+  -- TODO: cat << EOF
+  -- TODO: clean trap
+  -- TODO: "$()"
 
 }
