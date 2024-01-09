@@ -35,11 +35,6 @@ vim.keymap.set('', '<Leader>p', '"+p')
 vim.keymap.set('', '<Leader>P', '"+P')
 vim.keymap.set('', '<Leader><Leader>y', 'gg"+yG\'\'')
 
--- Diagnostic
-vim.keymap.set('n', '<Leader>d', vim.diagnostic.open_float, { desc = 'Show diagnostics in a floating window' })
-vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Move to the prev diagnostic' })
-vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Move to the next diagnostic' })
-
 -- Select the paste
 vim.keymap.set('', 'gp', function()
   local v = vim.fn.getregtype():sub(1, 1)
@@ -82,6 +77,35 @@ vim.keymap.set('', '<PageUp>', '<C-u>')
 vim.keymap.set('', '<PageDown>', '<C-d>')
 vim.keymap.set('', '<Home>', '^')
 
+-- Diagnostic
+vim.keymap.set('n', '<Leader>e', vim.diagnostic.open_float, { desc = 'Show diagnostics in a floating window' })
+vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Move to the prev diagnostic' })
+vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Move to the next diagnostic' })
+-- vim.keymap.set('n', '<space>q', vim.diagnostic.setloclist, { desc = '' })
+
+-- LSP
+vim.api.nvim_create_autocmd('LspAttach', {
+  group = vim.api.nvim_create_augroup('UserLspConfig', {}),
+  callback = function(ev)
+    -- vim.keymap.set('n', '<space>gd', vim.diagnostic.setloclist, { desc = '' } )
+    -- vim.keymap.set('n', 'gd', vim.lsp.buf.definition,           { desc = '' } )
+    -- vim.keymap.set('n', 'gD', vim.lsp.buf.declaration,          { desc = '' } )
+    -- vim.keymap.set('n', 'gi', vim.lsp.buf.implementation,       { desc = '' } )
+    -- vim.keymap.set('n', 'gr', vim.lsp.buf.references,           { desc = '' } )
+
+    -- Show help
+    vim.keymap.set('n', 'K', vim.lsp.buf.hover, { desc = 'Displays hover information' })
+    vim.keymap.set('n', '<Leader>rn', vim.lsp.buf.rename)
+
+    -- TODO: useless?
+    vim.keymap.set('n', '<Leader>wa', vim.lsp.buf.add_workspace_folder)
+    vim.keymap.set('n', '<Leader>wr', vim.lsp.buf.remove_workspace_folder)
+    vim.keymap.set('n', '<Leader>wl', function()
+      print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
+    end)
+  end,
+})
+
 -- Navigate windows
 local function win_focus_resize(arr, dir, cmd)
   vim.keymap.set('n', '<A-' .. arr .. '>', '<C-w>' .. dir)
@@ -91,6 +115,8 @@ local function win_focus_resize(arr, dir, cmd)
   vim.keymap.set('i', '<A-S-' .. arr .. '>', '<C-\\><C-N>3<C-w>' .. cmd .. 'gi')
   vim.keymap.set('t', '<A-S-' .. arr .. '>', '<C-\\><C-N>3<C-w>' .. cmd .. 'i')
 end
+
+-- Alt + (Sht) + h/j/k/l
 win_focus_resize('h', 'h', '<')
 win_focus_resize('j', 'j', '+')
 win_focus_resize('k', 'k', '-')
@@ -118,32 +144,3 @@ cabbrev('v', 'vs')
 -- Write file as root
 cabbrev('sudow', 'w !sudo tee %')
 cabbrev('doasw', 'w !doas tee %')
-
-vim.api.nvim_create_autocmd('LspAttach', {
-  group = vim.api.nvim_create_augroup('UserLspConfig', {}),
-  callback = function(ev)
-    -- vim.keymap.set('n', '<space>gd', vim.diagnostic.setloclist, { desc = '' } )
-    -- vim.keymap.set('n', 'gd', vim.lsp.buf.definition,           { desc = '' } )
-    -- vim.keymap.set('n', 'gD', vim.lsp.buf.declaration,          { desc = '' } )
-    -- vim.keymap.set('n', 'gi', vim.lsp.buf.implementation,       { desc = '' } )
-    -- vim.keymap.set('n', 'gr', vim.lsp.buf.references,           { desc = '' } )
-
-    -- Show help
-    vim.keymap.set('n', 'K', vim.lsp.buf.hover, { desc = 'Displays hover information' })
-    vim.keymap.set('n', '<Leader>k', vim.lsp.buf.signature_help, { desc = 'Displays signature information' })
-
-    -- Root dir
-    vim.keymap.set('n', '<Leader>wa', vim.lsp.buf.add_workspace_folder,
-      { desc = 'Add the folder at path to the workspace folders' })
-    vim.keymap.set('n', '<Leader>wr', vim.lsp.buf.remove_workspace_folder,
-      { desc = 'Remove the folder at path from the workspace folders' })
-    vim.keymap.set('n', '<Leader>wl', function()
-      print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
-    end, { desc = 'Print out workspace folders' })
-    vim.keymap.set('n', '<Leader>rn', vim.lsp.buf.rename,
-      { desc = 'Renames all references to the symbol under the cursor' })
-
-    -- Formatting
-    vim.keymap.set('n', '<Leader>=', vim.lsp.buf.format, { desc = 'Formats a buffer using the language server clients' })
-  end,
-})

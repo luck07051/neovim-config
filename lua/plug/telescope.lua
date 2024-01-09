@@ -15,7 +15,7 @@ M.keys = {
 
   { '<Leader>gd', function() require('telescope.builtin').diagnostics() end,          desc = 'Telescope for lsp_diagnostics' },
   { 'gd',         function() require('telescope.builtin').lsp_definitions() end,      desc = 'Telescope for lsp_definitions' },
-  { 'fD',         function() require('telescope.builtin').lsp_type_definitions() end, desc = 'Telescope for lsp_type_definitions' },
+  { 'gD',         function() require('telescope.builtin').lsp_type_definitions() end, desc = 'Telescope for lsp_type_definitions' },
   { 'gi',         function() require('telescope.builtin').lsp_implementations() end,  desc = 'Telescope for lsp_implementations' },
   { 'gr',         function() require('telescope.builtin').lsp_references() end,       desc = 'Telescope for lsp_references' },
 }

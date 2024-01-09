@@ -1,3 +1,6 @@
+-- if i even want switch one
+-- https://github.com/stevearc/conform.nvim
+
 local M = {
   'elentok/format-on-save.nvim',
   event = 'VeryLazy',
@@ -16,8 +19,8 @@ M.config = function()
       '.local/share/nvim/lazy',
     },
     formatter_by_ft = {
-      rust = require 'format-on-save.formatters'.lsp,
-      lua = require 'format-on-save.formatters'.lsp,
+      rust = formatters.lsp,
+      lua = formatters.lsp,
     }
   })
 end
