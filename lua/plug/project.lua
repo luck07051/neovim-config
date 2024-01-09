@@ -1,6 +1,6 @@
 return {
   'ahmedkhalf/project.nvim',
-  -- enabled = false,
+  enabled = false,
   event = 'BufReadPre',
   config = function()
     require('project_nvim').setup()

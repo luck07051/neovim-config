@@ -37,9 +37,6 @@ M.config = function()
       ['<C-x>'] = cmp.mapping.close(),
       ['<C-d>'] = cmp.mapping.scroll_docs(-4),
       ['<C-f>'] = cmp.mapping.scroll_docs(4),
-
-      -- ['<Tab>'] = cmp.mapping.select_next_item(),
-      -- ['<S-Tab>'] = cmp.mapping.select_prev_item(),
     },
 
     sources = {

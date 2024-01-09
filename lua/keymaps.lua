@@ -18,6 +18,11 @@ vim.keymap.set('t', '<C-[>', '<C-\\><C-n>')
 vim.keymap.set('t', '<C-w>', '<C-\\><C-n><C-w>')
 
 
+-- Visual mapping
+vim.keymap.set('v', 'J', ":m '<+1<cr>gv=gv")
+vim.keymap.set('v', 'K', ":m '>-1<cr>gv=gv")
+
+
 -- Buffer movement
 vim.keymap.set('n', '<BS>', '<C-^>')
 vim.keymap.set('n', '<Tab>', ':bn<cr>')
@@ -113,3 +118,32 @@ cabbrev('v', 'vs')
 -- Write file as root
 cabbrev('sudow', 'w !sudo tee %')
 cabbrev('doasw', 'w !doas tee %')
+
+vim.api.nvim_create_autocmd('LspAttach', {
+  group = vim.api.nvim_create_augroup('UserLspConfig', {}),
+  callback = function(ev)
+    -- vim.keymap.set('n', '<space>gd', vim.diagnostic.setloclist, { desc = '' } )
+    -- vim.keymap.set('n', 'gd', vim.lsp.buf.definition,           { desc = '' } )
+    -- vim.keymap.set('n', 'gD', vim.lsp.buf.declaration,          { desc = '' } )
+    -- vim.keymap.set('n', 'gi', vim.lsp.buf.implementation,       { desc = '' } )
+    -- vim.keymap.set('n', 'gr', vim.lsp.buf.references,           { desc = '' } )
+
+    -- Show help
+    vim.keymap.set('n', 'K', vim.lsp.buf.hover, { desc = 'Displays hover information' })
+    vim.keymap.set('n', '<Leader>k', vim.lsp.buf.signature_help, { desc = 'Displays signature information' })
+
+    -- Root dir
+    vim.keymap.set('n', '<Leader>wa', vim.lsp.buf.add_workspace_folder,
+      { desc = 'Add the folder at path to the workspace folders' })
+    vim.keymap.set('n', '<Leader>wr', vim.lsp.buf.remove_workspace_folder,
+      { desc = 'Remove the folder at path from the workspace folders' })
+    vim.keymap.set('n', '<Leader>wl', function()
+      print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
+    end, { desc = 'Print out workspace folders' })
+    vim.keymap.set('n', '<Leader>rn', vim.lsp.buf.rename,
+      { desc = 'Renames all references to the symbol under the cursor' })
+
+    -- Formatting
+    vim.keymap.set('n', '<Leader>=', vim.lsp.buf.format, { desc = 'Formats a buffer using the language server clients' })
+  end,
+})
