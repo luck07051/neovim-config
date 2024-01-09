@@ -1,6 +1,6 @@
 vim.opt.ruler = false
 vim.opt.showmode = false
-vim.opt.laststatus = 3    -- global statusline
+vim.opt.laststatus = 3 -- global statusline
 vim.opt.cmdheight = 0
 
 -- Some shortmess work with cmdheight=0
@@ -11,7 +11,7 @@ vim.opt.shortmess:append('S')
 vim.opt.shortmess:remove('t')
 
 local hi = function(group)
-  return '%#'..group..'#'
+  return '%#' .. group .. '#'
 end
 
 local format_count = function(format, count)
@@ -29,7 +29,7 @@ local vcs = function()
   local changed = format_count(' ~%s', git_info.changed)
   local removed = format_count(' -%s', git_info.removed)
   return table.concat {
-    '  '..git_info.head,
+    '  ' .. git_info.head,
     added,
     changed,
     removed,
@@ -38,10 +38,10 @@ end
 
 local diagnostics = function()
   return table.concat {
-    format_count(' %s', #(vim.diagnostic.get(0, { severity = 'Error'}))),
-    format_count(' %s', #(vim.diagnostic.get(0, { severity = 'Warn'}))),
-    format_count(' %s', #(vim.diagnostic.get(0, { severity = 'Info'}))),
-    format_count(' %s', #(vim.diagnostic.get(0, { severity = 'Hint'}))),
+    format_count(' %s', #(vim.diagnostic.get(0, { severity = 'Error' }))),
+    format_count(' %s', #(vim.diagnostic.get(0, { severity = 'Warn' }))),
+    format_count(' %s', #(vim.diagnostic.get(0, { severity = 'Info' }))),
+    format_count(' %s', #(vim.diagnostic.get(0, { severity = 'Hint' }))),
   }
 end
 
@@ -68,19 +68,19 @@ end
 
 function statusline()
   return table.concat({
-    '  %t %h%m%r%w',  -- Flie info
+    '  %t %h%m%r%w', -- Flie info
     vcs(),
     diagnostics(),
 
-    '%=',  -- Separation
+    '%=', -- Separation
 
     hi('MatchParen'),
     macro_recoding(),
     search_count(),
     hi('StatusLine'),
-    '  %{&filetype}',  -- Flietype
-    '  %{&expandtab?"󱁐 ":"󰌒 "}%{&tabstop}',  -- Indent info
-    '  %L',  -- Line info
+    '  %{&filetype}', -- Flietype
+    '  %{&expandtab?"󱁐 ":"󰌒 "}%{&tabstop}', -- Indent info
+    '  %L', -- Line info
     '  ',
   })
 end

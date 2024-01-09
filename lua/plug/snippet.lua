@@ -2,17 +2,15 @@ return {
   'L3MON4D3/LuaSnip',
   event = { 'InsertEnter', 'CmdlineEnter' },
   keys = {
-    { '<PageDown>', mode = { 'i', 's' }, function()
-        require('luasnip').expand_or_jump()
-    end },
-    { '<PageUp>', mode = { 'i', 's' }, function()
-        require('luasnip').jump(-1)
-    end },
-    { '<End>', mode = { 'i', 's' }, function()
-      if require('luasnip').choice_active() then
-        require('luasnip').change_choice(1)
+    { '<PageDown>', mode = { 'i', 's' }, function() require('luasnip').expand_or_jump() end },
+    { '<PageUp>',   mode = { 'i', 's' }, function() require('luasnip').jump(-1) end },
+    {
+      '<End>',
+      mode = { 'i', 's' },
+      function()
+        if require('luasnip').choice_active() then require('luasnip').change_choice(1) end
       end
-    end },
+    },
   },
 
   config = function()

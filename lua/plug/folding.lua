@@ -1,5 +1,6 @@
 return {
   'kevinhwang91/nvim-ufo',
+  enabled = false,
   event = 'VeryLazy',
   dependencies = {
     'kevinhwang91/promise-async',
@@ -11,7 +12,7 @@ return {
 
   opts = {
     provider_selector = function(bufnr, filetype, buftype)
-        return {'treesitter', 'indent'}
+      return { 'treesitter', 'indent' }
     end,
 
     preview = {
@@ -35,7 +36,7 @@ return {
         else
           chunkText = truncate(chunkText, targetWidth - curWidth)
           local hlGroup = chunk[2]
-          table.insert(newVirtText, {chunkText, hlGroup})
+          table.insert(newVirtText, { chunkText, hlGroup })
           chunkWidth = vim.fn.strdisplaywidth(chunkText)
           -- str width returned from truncate() may less than 2nd argument, need padding
           if curWidth + chunkWidth < targetWidth then
@@ -45,21 +46,21 @@ return {
         end
         curWidth = curWidth + chunkWidth
       end
-      table.insert(newVirtText, {suffix, 'MoreMsg'})
+      table.insert(newVirtText, { suffix, 'MoreMsg' })
       return newVirtText
     end
   },
 
   keys = {
-    { 'zR', function() require('ufo').openAllFolds() end, desc = 'ufo open all folds' },
-    { 'zM', function() require('ufo').closeAllFolds() end, desc = 'ufo close all flods' },
+    { 'zR', function() require('ufo').openAllFolds() end,         desc = 'ufo open all folds' },
+    { 'zM', function() require('ufo').closeAllFolds() end,        desc = 'ufo close all flods' },
     { 'zr', function() require('ufo').openFoldsExceptKinds() end, desc = '' },
     { 'zm', function() require('ufo').closeFoldsWith() end },
 
-    { '<enter>',  function()
-        local winid = require('ufo').peekFoldedLinesUnderCursor()
-        -- if not winid then vim.lsp.buf.hover() end
-      end
+    { '<enter>', function()
+      local winid = require('ufo').peekFoldedLinesUnderCursor()
+      -- if not winid then vim.lsp.buf.hover() end
+    end
     },
   },
 }

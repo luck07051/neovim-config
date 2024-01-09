@@ -1,7 +1,3 @@
--------------------------------
---          AUTOCMD          --
--------------------------------
-
 local au = vim.api.nvim_create_autocmd
 local ag = vim.api.nvim_create_augroup
 

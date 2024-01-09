@@ -41,22 +41,22 @@ function M.get_visual_node(_, parent, _, default, indent)
   local indent_text = string.rep('\t', indent)
 
   if next(select) == nil then
-      return sn(nil, {
-        t(indent_text),
-        isn(1, { i(1, default) }, '$PARENT_INDENT'..indent_text)
-      })
+    return sn(nil, {
+      t(indent_text),
+      isn(1, { i(1, default) }, '$PARENT_INDENT' .. indent_text)
+    })
   end
 
   -- remove indent
   local context = {}
   local space = select[next(select)]:match('^(%s*)')
   for _, ele in ipairs(select) do
-    table.insert(context, ele:match('^'..space..'(.*)'))
+    table.insert(context, ele:match('^' .. space .. '(.*)'))
   end
 
   return sn(nil, {
     t(indent_text),
-    isn(nil, { t(context) }, '$PARENT_INDENT'..indent_text),
+    isn(nil, { t(context) }, '$PARENT_INDENT' .. indent_text),
     i(1)
   })
 end
@@ -65,7 +65,7 @@ function M.input(pos, opts)
   local default = opts and opts.default or nil
   local indent = opts and opts.indent or 0
   return r(pos, 'input', {
-    d(1, M.get_visual_node, {}, {user_args = {default, indent}}),
+    d(1, M.get_visual_node, {}, { user_args = { default, indent } }),
   }, opts)
 end
 

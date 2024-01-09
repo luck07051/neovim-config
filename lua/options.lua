@@ -1,7 +1,3 @@
--------------------------------
---          OPTIONS          --
--------------------------------
-
 vim.opt.number = true
 -- vim.opt.relativenumber = true
 vim.opt.signcolumn = 'yes'
@@ -26,10 +22,10 @@ vim.opt.inccommand = 'split'
 -- Special Char Visualization --
 vim.opt.list = true
 vim.opt.listchars = { tab = '▸ ', trail = '·' }
-vim.opt.fillchars='eob: '
+vim.opt.fillchars = 'eob: '
 
 -- Msic --
-vim.opt.shortmess:append('I')  -- no intro message
+vim.opt.shortmess:append('I') -- no intro message
 vim.opt.splitbelow = true
 vim.opt.splitright = true
 vim.opt.swapfile = false
