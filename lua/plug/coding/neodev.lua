@@ -1,4 +1,6 @@
 return {
   'folke/neodev.nvim',
-  config = true,
+  opts = {
+    library = { plugins = { "nvim-dap-ui" }, types = true },
+  },
 }
