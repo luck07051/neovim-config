@@ -53,8 +53,17 @@ au('TextYankPost', {
 })
 
 -- Settings for terminal mode
-au('TermOpen', { command = 'setlocal nonumber signcolumn=no' })
-au('TermOpen', { command = 'startinsert' })
+au('TermOpen', {
+  callback = function(opts)
+    -- when start dap, it active the insert mode, i dont want that
+    if opts.file:match('dap%-terminal') then
+      return
+    end
+    vim.cmd('startinsert')
+    vim.cmd('setlocal nonu')
+    vim.cmd('setlocal signcolumn=no')
+  end,
+})
 
 -- Only focused window has cursorline
 au('WinEnter', { command = 'setlocal cursorline' })
