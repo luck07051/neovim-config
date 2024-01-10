@@ -9,9 +9,9 @@ local M = {
 }
 
 M.config = function()
-  require("mason").setup()
-  require("mason-lspconfig").setup({
-    ensure_installed = { "lua_ls", "rust_analyzer" },
+  require('mason').setup()
+  require('mason-lspconfig').setup({
+    ensure_installed = { 'lua_ls', 'rust_analyzer' },
     automatic_installation = true,
   })
 
@@ -19,15 +19,15 @@ M.config = function()
   local has_cmp, cmp_lsp = pcall(require, 'cmp_nvim_lsp')
   local capabilities = has_cmp and cmp_lsp.default_capabilities() or vim.lsp.protocol.make_client_capabilities()
 
-  require("mason-lspconfig").setup_handlers {
+  require('mason-lspconfig').setup_handlers {
     function(server_name)
-      require("lspconfig")[server_name].setup({
+      require('lspconfig')[server_name].setup({
         capabilities = capabilities,
       })
     end,
 
-    ["lua_ls"] = function()
-      require("lspconfig").lua_ls.setup({
+    ['lua_ls'] = function()
+      require('lspconfig').lua_ls.setup({
         settings = {
           Lua = {
             diagnostics = {
@@ -44,8 +44,8 @@ M.config = function()
       })
     end,
 
-    ["rust_analyzer"] = function()
-      require("lspconfig").rust_analyzer.setup({
+    ['rust_analyzer'] = function()
+      require('lspconfig').rust_analyzer.setup({
         settings = {
           ['rust-analyzer'] = {
             checkOnSave = {
@@ -56,8 +56,8 @@ M.config = function()
       })
     end,
 
-    ["pylsp"] = function()
-      require("lspconfig").pylsp.setup({
+    ['pylsp'] = function()
+      require('lspconfig').pylsp.setup({
         settings = {
           pylsp = {
             plugins = {

@@ -1,5 +1,5 @@
-return {
-  "j-hui/fidget.nvim",
+return { -- notification for lsp
+  'j-hui/fidget.nvim',
   event = 'BufReadPre',
   opts = {
     notification = {
