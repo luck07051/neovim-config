@@ -14,7 +14,6 @@ local M = {
     'hrsh7th/cmp-nvim-lua',
     'kdheepak/cmp-latex-symbols',
 
-    'hrsh7th/cmp-nvim-lsp',
     'saadparwaiz1/cmp_luasnip',
   },
 }
@@ -22,6 +21,10 @@ local M = {
 M.config = function()
   local cmp = require 'cmp'
   local luasnip = require 'luasnip'
+
+  -- Close cmp menu when press <C-f> --
+  vim.keymap.set('c', '<C-f>', '<C-f>a<Esc>',
+    { desc = 'Use insert mode in commandline mode (a<esc> for close the cmp menu)' })
 
   cmp.setup {
     mapping = {
@@ -40,13 +43,13 @@ M.config = function()
     },
 
     sources = {
-      -- { name = 'neorg' },
       { name = 'nvim_lsp' },
       { name = 'nvim_lsp_signature_help' },
-      { name = 'nvim_lua' },
-
-      { name = 'latex_symbols' },
       { name = 'luasnip' },
+
+      -- { name = 'neorg' },
+      { name = 'nvim_lua' },
+      { name = 'latex_symbols' },
 
       { name = 'treesitter' },
       { name = 'buffer' },
@@ -55,23 +58,8 @@ M.config = function()
 
     preselect = cmp.PreselectMode.None,
 
-    completion = {
-      -- autocomplete = false
-      -- keyword_length = 2
-    },
-
-    window = {
-      completion = {
-        col_offset = -2,
-        side_padding = 1,
-      },
-      documentation = {
-        border = { ' ' },
-      },
-    },
-
     formatting = {
-      fields = { 'kind', 'abbr' },
+      fields = { 'abbr', 'kind' },
       format = function(entry, vim_item)
         if vim.tbl_contains({ 'path' }, entry.source.name) then
           local icon, hl_group = require('nvim-web-devicons').get_icon(entry:get_completion_item().label)
@@ -87,10 +75,21 @@ M.config = function()
 
     snippet = {
       expand = function(args)
-        -- For luasnip --
         luasnip.lsp_expand(args.body)
       end,
     },
+
+    enabled = function()
+      -- disable completion in comments
+      local context = require 'cmp.config.context'
+      -- keep command mode completion enabled when cursor is in a comment
+      if vim.api.nvim_get_mode().mode == 'c' then
+        return true
+      else
+        return not context.in_treesitter_capture("comment")
+            and not context.in_syntax_group("Comment")
+      end
+    end
   }
 
 
@@ -118,11 +117,8 @@ M.config = function()
 
     formatting = {
       fields = { 'abbr' },
-    }
+    },
   })
-
-  -- Close cmp menu when press <C-f> --
-  vim.keymap.set('c', '<C-f>', '<C-f>a<Esc>', { desc = 'Close cmp menu' })
 end
 
 return M
