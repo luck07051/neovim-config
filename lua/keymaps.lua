@@ -73,6 +73,7 @@ end, { expr = true })
 vim.keymap.set('n', '<C-n>', '.nzzzv')
 
 -- Spell check
+-- TODO: add some lang
 vim.keymap.set('n', '<Leader>sp', ':setlocal spell! spelllang=en_us<CR>')
 
 -- Switch conceal
@@ -82,9 +83,9 @@ end, { silent = true, desc = 'Toggle conceal' })
 
 -- Diagnostic
 vim.keymap.set('n', '<Leader>e', vim.diagnostic.open_float, { desc = 'Show diagnostics in a floating window' })
-vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Move to the prev diagnostic' })
-vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Move to the next diagnostic' })
--- vim.keymap.set('n', '<space>q', vim.diagnostic.setloclist, { desc = '' })
+vim.keymap.set('n', '<Leader>dj', vim.diagnostic.goto_prev, { desc = 'Move to the prev diagnostic' })
+vim.keymap.set('n', '<Leader>dk', vim.diagnostic.goto_next, { desc = 'Move to the next diagnostic' })
+vim.keymap.set('n', '<Leader>dc', vim.diagnostic.setloclist, { desc = '' })
 
 -- LSP
 vim.api.nvim_create_autocmd('LspAttach', {
