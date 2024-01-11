@@ -1,3 +1,6 @@
+-- to see which char map to which mode:
+-- :h map-table
+
 -- Make space as leader key
 vim.keymap.set('', '<Space>', '<Nop>')
 vim.g.mapleader = ' '
@@ -18,15 +21,20 @@ vim.keymap.set('t', '<C-[>', '<C-\\><C-n>')
 vim.keymap.set('t', '<C-w>', '<C-\\><C-n><C-w>')
 
 
--- Visual mapping
-vim.keymap.set('v', 'J', ":m '<+1<cr>gv=gv")
-vim.keymap.set('v', 'K', ":m '>-1<cr>gv=gv")
+-- Visual mode mapping
+vim.keymap.set('v', 'J', ":m '>+1<cr>gv=gv")
+vim.keymap.set('v', 'K', ":m '<-2<cr>gv=gv")
 
 
 -- Buffer movement
 vim.keymap.set('n', '<BS>', '<C-^>')
 vim.keymap.set('n', '<Tab>', ':bn<cr>')
 vim.keymap.set('n', '<S-Tab>', ':bp<cr>')
+
+-- Remapping navigation keys
+vim.keymap.set('', '<PageUp>', '<C-u>')
+vim.keymap.set('', '<PageDown>', '<C-d>')
+vim.keymap.set('', '<Home>', '^')
 
 -- Copy paste with clipboard
 vim.keymap.set('', '<Leader>y', '"+y')
@@ -35,7 +43,7 @@ vim.keymap.set('', '<Leader>p', '"+p')
 vim.keymap.set('', '<Leader>P', '"+P')
 vim.keymap.set('', '<Leader><Leader>y', 'gg"+yG\'\'')
 
--- Select the paste
+-- Select the context just paste
 vim.keymap.set('', 'gp', function()
   local v = vim.fn.getregtype():sub(1, 1)
   if v == '' then
@@ -71,11 +79,6 @@ vim.keymap.set('n', '<Leader>sp', ':setlocal spell! spelllang=en_us<CR>')
 vim.keymap.set('n', '<Leader>zc', function()
   vim.o.conceallevel = vim.o.conceallevel > 0 and 0 or 3
 end, { silent = true, desc = 'Toggle conceal' })
-
--- Remapping navigation keys
-vim.keymap.set('', '<PageUp>', '<C-u>')
-vim.keymap.set('', '<PageDown>', '<C-d>')
-vim.keymap.set('', '<Home>', '^')
 
 -- Diagnostic
 vim.keymap.set('n', '<Leader>e', vim.diagnostic.open_float, { desc = 'Show diagnostics in a floating window' })
