@@ -66,7 +66,7 @@ local search_count = function()
 end
 
 
-function statusline()
+function Statusline()
   return table.concat({
     '  %t %h%m%r%w', -- Flie info
     vcs(),
@@ -85,4 +85,4 @@ function statusline()
   })
 end
 
-vim.opt.statusline = '%!v:lua.statusline()'
+vim.opt.statusline = '%!v:lua.Statusline()'
