@@ -52,7 +52,7 @@ vim.keymap.set('', 'gp', function()
   -- `:h getregtype`: <C-V> is one character with value 0x16
   v = v:byte() == 0x16 and '<C-V>' or v
   return '`[' .. v .. '`]'
-end, { expr = true, desc = 'Select the paste' })
+end, { expr = true, desc = 'Selecting the paste' })
 
 -- Center the search
 vim.keymap.set('n', 'n', 'nzzzv')
@@ -85,7 +85,7 @@ end, { silent = true, desc = 'Toggle conceal' })
 vim.keymap.set('n', '<Leader>e', vim.diagnostic.open_float, { desc = 'Show diagnostics in a floating window' })
 vim.keymap.set('n', '<Leader>dj', vim.diagnostic.goto_prev, { desc = 'Move to the prev diagnostic' })
 vim.keymap.set('n', '<Leader>dk', vim.diagnostic.goto_next, { desc = 'Move to the next diagnostic' })
-vim.keymap.set('n', '<Leader>dc', vim.diagnostic.setloclist, { desc = '' })
+vim.keymap.set('n', '<Leader>dc', vim.diagnostic.setloclist, { desc = 'Add diagnostic to loclist' })
 
 -- LSP
 vim.api.nvim_create_autocmd('LspAttach', {
@@ -99,15 +99,14 @@ vim.api.nvim_create_autocmd('LspAttach', {
 
     -- Show help
     vim.keymap.set('n', 'K', vim.lsp.buf.hover, { desc = 'Displays hover information' })
-    vim.keymap.set('n', '<Leader>rn', vim.lsp.buf.rename)
-    vim.keymap.set('n', '<Leader>ca', vim.lsp.buf.code_action)
+    vim.keymap.set('n', '<Leader>rn', vim.lsp.buf.rename, { desc = 'Rename on workspace level' })
+    vim.keymap.set('n', '<Leader>ca', vim.lsp.buf.code_action, { desc = 'Code action provided by lsp' })
 
-    -- TODO: useless?
-    vim.keymap.set('n', '<Leader>wa', vim.lsp.buf.add_workspace_folder)
-    vim.keymap.set('n', '<Leader>wr', vim.lsp.buf.remove_workspace_folder)
+    vim.keymap.set('n', '<Leader>wa', vim.lsp.buf.add_workspace_folder, { desc = 'Add workspace folder' })
+    vim.keymap.set('n', '<Leader>wr', vim.lsp.buf.remove_workspace_folder, { desc = 'Remove workspace folder' })
     vim.keymap.set('n', '<Leader>wl', function()
       print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
-    end)
+    end, { desc = 'Display the workspace folders' })
   end,
 })
 
