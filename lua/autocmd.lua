@@ -55,13 +55,15 @@ au('TextYankPost', {
 -- Settings for terminal mode
 au('TermOpen', {
   callback = function(opts)
-    -- when start dap, it active the insert mode, i dont want that
-    if opts.file:match('dap%-terminal') then
-      return
-    end
-    vim.cmd('startinsert')
-    vim.cmd('setlocal nonu')
-    vim.cmd('setlocal signcolumn=no')
+    -- delay a small time, so some plugins that open a terminal on
+    -- other window, don't exec these cmd
+    vim.defer_fn(function()
+      if vim.api.nvim_buf_get_option(0, 'buftype') == 'terminal' then
+        vim.cmd('startinsert')
+        vim.cmd('setlocal nonu')
+        vim.cmd('setlocal signcolumn=no')
+      end
+    end, 100)
   end,
 })
 
