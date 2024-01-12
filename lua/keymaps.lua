@@ -100,6 +100,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
     -- Show help
     vim.keymap.set('n', 'K', vim.lsp.buf.hover, { desc = 'Displays hover information' })
     vim.keymap.set('n', '<Leader>rn', vim.lsp.buf.rename)
+    vim.keymap.set('n', '<Leader>ca', vim.lsp.buf.code_action)
 
     -- TODO: useless?
     vim.keymap.set('n', '<Leader>wa', vim.lsp.buf.add_workspace_folder)
