@@ -1,6 +1,5 @@
 return {
   'kevinhwang91/nvim-ufo',
-  enabled = false,
   event = 'VeryLazy',
   dependencies = {
     'kevinhwang91/promise-async',
@@ -59,7 +58,7 @@ return {
 
     { '<enter>', function()
       local winid = require('ufo').peekFoldedLinesUnderCursor()
-      -- if not winid then vim.lsp.buf.hover() end
+      if not winid then vim.lsp.buf.hover() end
     end
     },
   },

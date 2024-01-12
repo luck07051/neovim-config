@@ -69,16 +69,6 @@ au('TermOpen', {
 au('WinEnter', { command = 'setlocal cursorline' })
 au('WinLeave', { command = 'setlocal nocursorline' })
 
-
--- Use marker folding in nvim config
-au('BufEnter', {
-  pattern = { '*/.config/nvim/*' },
-  callback = function()
-    vim.opt.foldmethod = 'marker'
-    vim.opt.foldlevel = 0
-  end
-})
-
 -- Correcting the filetype
 local function corrft(pattern, ft)
   au('BufEnter', {
