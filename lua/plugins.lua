@@ -10,7 +10,7 @@ vim.opt.runtimepath:prepend(lazypath)
 
 require('lazy').setup({
   { import = "plug" },
-  { import = "plug.coding" },
+  { import = "plug.lang" },
   { import = "plug.extras" },
 }, {
   defaults = { lazy = true },

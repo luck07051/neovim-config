@@ -4,8 +4,6 @@ return {
     'nvim-lua/plenary.nvim',
     'antoinemadec/FixCursorHold.nvim',
     'nvim-treesitter/nvim-treesitter',
-
-    'rouge8/neotest-rust', -- $ cargo install cargo-nextest
   },
 
   keys = {
@@ -16,11 +14,11 @@ return {
     { '<Leader>ts', function() require("neotest").summary.toggle() end,            desc = 'Toggle test summary' },
   },
 
-  config = function()
-    require("neotest").setup({
-      adapters = {
-        require("neotest-rust"),
-      },
-    })
-  end,
+  opts = {
+    adapters = {},
+  },
+
+  config = function(_, opts)
+    require('neotest').setup(opts)
+  end
 }

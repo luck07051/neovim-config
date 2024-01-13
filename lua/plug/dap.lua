@@ -1,5 +1,3 @@
--- [LazyVim/lua/lazyvim/plugins/extras/dap/core.lua at main · LazyVim/LazyVim](https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/plugins/extras/dap/core.lua)
-
 return {
   {
     'mfussenegger/nvim-dap',
@@ -20,7 +18,6 @@ return {
       { '<leader>ds', function() require('dap').session() end,                                              desc = 'Session' },
       { '<leader>dt', function() require('dap').terminate() end,                                            desc = 'Terminate' },
       { '<leader>dw', function() require('dap.ui.widgets').hover() end,                                     desc = 'Widgets' },
-
       -- { '<leader>da', function() require('dap').continue({ before = get_args }) end, desc = 'Run with Args' },
       -- { '<leader>dC', function() require('dap').run_to_cursor() end,                 desc = 'Run to Cursor' },
       -- { '<leader>dg', function() require('dap').goto_() end,                         desc = 'Go to line (no execute)' },
@@ -31,46 +28,13 @@ return {
       -- { '<leader>dr', function() require('dap').repl.toggle() end,                   desc = 'Toggle REPL' },
     },
 
-    config = function()
+    config = function(_, opts)
+      -- setup dap config by VsCode launch.json file
+      require('dap.ext.vscode').load_launchjs()
       local dap = require('dap')
-
-      -- Rust
-      local function cargo_build(cmd)
-        local lines = vim.fn.systemlist(cmd)
-        local output = table.concat(lines, 'n')
-        local filename = output:match('^.*"executable":"(.*)",.*n.*,"success":true}$')
-
-        if filename == nil then
-          return error('failed to build cargo project')
-        end
-
-        return filename
+      for lang, lang_opts in pairs(opts.configurations) do
+        dap.configurations[lang] = lang_opts
       end
-
-      dap.configurations.rust = {
-        {
-          name = 'Debug Test',
-          type = 'codelldb',
-          request = 'launch',
-          program = function()
-            return cargo_build('cargo build --tests -q --message-format=json')
-          end,
-          cwd = '${workspaceFolder}',
-          stopOnEntry = false,
-          showDisassembly = 'never'
-        },
-        {
-          name = 'Debug Bin',
-          type = 'codelldb',
-          request = 'launch',
-          program = function()
-            return cargo_build('cargo build -q --message-format=json')
-          end,
-          cwd = '${workspaceFolder}',
-          stopOnEntry = false,
-          showDisassembly = 'never'
-        }
-      }
     end,
   },
 
@@ -82,26 +46,16 @@ return {
     },
     opts = {},
     config = function(_, opts)
-      -- setup dap config by VsCode launch.json file
-      require('dap.ext.vscode').load_launchjs()
       local dap = require('dap')
       local dapui = require('dapui')
 
       dapui.setup(opts)
 
       -- automatically open / close window
-      dap.listeners.before.attach.dapui_config = function()
-        dapui.open()
-      end
-      dap.listeners.before.launch.dapui_config = function()
-        dapui.open()
-      end
-      dap.listeners.before.event_terminated.dapui_config = function()
-        dapui.close()
-      end
-      dap.listeners.before.event_exited.dapui_config = function()
-        dapui.close()
-      end
+      dap.listeners.before.attach.dapui_config = function() dapui.open() end
+      dap.listeners.before.launch.dapui_config = function() dapui.open() end
+      dap.listeners.before.event_terminated.dapui_config = function() dapui.close() end
+      dap.listeners.before.event_exited.dapui_config = function() dapui.close() end
     end,
   },
 
@@ -113,9 +67,6 @@ return {
     cmd = { 'DapInstall', 'DapUninstall' },
     opts = {
       automatic_installation = true,
-      ensure_installed = {
-        'codelldb', -- c / c++ / rust
-      },
       handlers = {
         function(config)
           require('mason-nvim-dap').default_setup(config)

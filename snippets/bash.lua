@@ -1,4 +1,3 @@
-
 local util = require('luasnip-util')
 
 local function cond_node(jump)
@@ -16,7 +15,7 @@ return {
     dscr = 'Create a function',
   }, {
     -- i(1, 'name'), t({'() {', ''}), util.input(2, {indent=1}), t({'', '}'}),
-    i(1, 'name'), t({'() {', ''}), util.input(2, {indent=1}), t({'', '}'}),
+    i(1, 'name'), t({ '() {', '' }), util.input(2, { indent = 1 }), t({ '', '}' }),
   }),
 
   s({
@@ -24,9 +23,9 @@ return {
     name = 'if',
     dscr = 'Create a if',
   }, {
-    t('if '), cond_node(1), t({'; then', ''}),
-    util.input(2, {indent=1}),
-    t({'', 'fi'})
+    t('if '), cond_node(1), t({ '; then', '' }),
+    util.input(2, { indent = 1 }),
+    t({ '', 'fi' })
   }),
 
   s({
@@ -34,9 +33,9 @@ return {
     name = 'for',
     dscr = 'Create a for loop',
   }, {
-    t('for '), i(1, 'i'), t(' in '), i(2, 'list'), t({'; do', ''}),
-    util.input(3, {indent=1}),
-    t({'', 'done'})
+    t('for '), i(1, 'i'), t(' in '), i(2, 'list'), t({ '; do', '' }),
+    util.input(3, { indent = 1 }),
+    t({ '', 'done' })
   }),
 
   s({
@@ -44,9 +43,9 @@ return {
     name = 'while',
     dscr = 'Create a while loop',
   }, {
-    t('while '), cond_node(1), t({'; do', ''}),
-    util.input(2, {indent=1}),
-    t({'', 'done'})
+    t('while '), cond_node(1), t({ '; do', '' }),
+    util.input(2, { indent = 1 }),
+    t({ '', 'done' })
   }),
 
   s({
@@ -54,9 +53,9 @@ return {
     name = 'case',
     dscr = 'Create a case',
   }, {
-    t('case '), i(1, '$i'), t({' in', ''}),
+    t('case '), i(1, '$i'), t({ ' in', '' }),
     t('\t'), i(2, "'--'"), t(') '), i(3, 'break'), t(' ;;'),
-    t({'', 'esac'})
+    t({ '', 'esac' })
   }),
 
   s({
@@ -67,11 +66,11 @@ return {
     c(1, {
       sn(nil, {
         t('type '), i(1, 'cmd'), t(' >/dev/null '),
-        c(2, { t('&&'), t('||')}), t(' '), util.input(3),
+        c(2, { t('&&'), t('||') }), t(' '), util.input(3),
       }),
       sn(nil, {
-        t('if type '), i(1, 'cmd'), t({' >/dev/null; then', '\t'}),
-        util.input(2), t({'', 'fi'}),
+        t('if type '), i(1, 'cmd'), t({ ' >/dev/null; then', '\t' }),
+        util.input(2), t({ '', 'fi' }),
       }),
     }),
   }),
@@ -81,8 +80,8 @@ return {
     name = 'while read line',
     dscr = 'Processes the file with read',
   }, {
-    t({'while read -r line; do', ''}), util.input(2, {indent=1}),
-    t({'', 'done <'}), i(1, '"$file"')
+    t({ 'while read -r line; do', '' }), util.input(2, { indent = 1 }),
+    t({ '', 'done <' }), i(1, '"$file"')
   }),
 
   s({

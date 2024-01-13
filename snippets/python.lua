@@ -1,4 +1,3 @@
-
 local util = require('luasnip-util')
 
 local function for_node(jump)
@@ -22,7 +21,7 @@ return {
     name = 'function',
     dscr = 'Create a function',
   }, {
-    t('def '), i(1, 'name'), t({':', ''}), util.input(2, {indent=1}),
+    t('def '), i(1, 'name'), t({ ':', '' }), util.input(2, { indent = 1 }),
   }),
 
   s({
@@ -30,7 +29,7 @@ return {
     name = 'if',
     dscr = 'Create a if',
   }, {
-    t('if '), i(1, 'cond'), t({':', ''}), util.input(2, {indent=1}),
+    t('if '), i(1, 'cond'), t({ ':', '' }), util.input(2, { indent = 1 }),
   }),
 
   s({
@@ -38,7 +37,7 @@ return {
     name = 'for',
     dscr = 'Create a for loop',
   }, {
-    for_node(1), t({':', ''}), util.input(2, {indent=1}),
+    for_node(1), t({ ':', '' }), util.input(2, { indent = 1 }),
   }),
 
   s({
@@ -46,7 +45,7 @@ return {
     name = 'while',
     dscr = 'Create a while',
   }, {
-    t('while '), i(1, 'cond'), t({':', ''}), util.input(2, {indent=1}),
+    t('while '), i(1, 'cond'), t({ ':', '' }), util.input(2, { indent = 1 }),
   }),
 
   s({
@@ -54,8 +53,8 @@ return {
     name = 'If main',
     dscr = 'Create if name == main snippet',
   }, {
-    t({'def main():', ''}), util.input(1, {indent=1}),
-    t({'', '', "if __name__ == '__main__':", '\tmain()'})
+    t({ 'def main():', '' }), util.input(1, { indent = 1 }),
+    t({ '', '', "if __name__ == '__main__':", '\tmain()' })
   }),
 
   s({

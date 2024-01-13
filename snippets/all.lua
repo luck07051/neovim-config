@@ -1,4 +1,3 @@
-
 local util = require('luasnip-util')
 
 return {

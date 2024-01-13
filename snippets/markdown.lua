@@ -1,4 +1,3 @@
-
 local util = require('luasnip-util')
 
 return {
@@ -8,7 +7,7 @@ return {
     name = 'link',
     dscr = 'Insert a link',
   }, {
-    t('['), util.input(1, {default='Text'}), t(']('), i(2, 'URL'), t(')'),
+    t('['), util.input(1, { default = 'Text' }), t(']('), i(2, 'URL'), t(')'),
   }),
 
   s({
@@ -16,7 +15,7 @@ return {
     name = 'image',
     dscr = 'Insert a image',
   }, {
-    t('!['), util.input(1, {default='Text'}), t(']('), i(2, 'URL'), t(')'),
+    t('!['), util.input(1, { default = 'Text' }), t(']('), i(2, 'URL'), t(')'),
   }),
 
 }

@@ -1,20 +1,17 @@
-local M = {
+return {
   'nvim-treesitter/nvim-treesitter',
   event = 'BufReadPost',
   build = ':TSUpdate',
   dependencies = {
     'nvim-treesitter/playground',
   },
-}
 
-M.keys = {
-  { '<Leader>hi', function() vim.print(vim.treesitter.get_captures_at_cursor(0)) end, desc = 'Print treesitter structure' },
-}
+  keys = {
+    { '<Leader>hi', function() vim.print(vim.treesitter.get_captures_at_cursor(0)) end, desc = 'Print treesitter structure' },
+  },
 
-M.config = function()
-  local treesitter = require 'nvim-treesitter.configs'
-
-  treesitter.setup {
+  main = 'nvim-treesitter.configs',
+  opts = {
     ensure_installed = 'all',
     ignore_install = { '' },
 
@@ -37,7 +34,5 @@ M.config = function()
       -- use_virtual_text = true,
       -- lint_events = { 'BufWrite', 'CursorHold' },
     },
-  }
-end
-
-return M
+  },
+}

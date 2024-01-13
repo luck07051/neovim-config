@@ -1,4 +1,3 @@
-
 local util = require('luasnip-util')
 
 local function mathzone()
@@ -25,20 +24,20 @@ return {
       <>
       \end{<>}
     ]], {
-      i(1, 'document'), util.input(2), rep(1),
-      -- i(1, 'document'), t('\t'), r(2), rep(1),
-    })
+    i(1, 'document'), util.input(2), rep(1),
+    -- i(1, 'document'), t('\t'), r(2), rep(1),
+  })
   ),
 
   s({
-    trig='lr',
-    name='left right',
-    dscr='left right',
+    trig = 'lr',
+    name = 'left right',
+    dscr = 'left right',
   }, {
-      c(1, {
-        sn(nil, { t('\\left( '), util.input(1), t(' \\right)') }),
-        sn(nil, { t('\\left{ '), util.input(1), t(' \\right}') }),
-        sn(nil, { t('\\left[ '), util.input(1), t(' \\right]') }),
+    c(1, {
+      sn(nil, { t('\\left( '), util.input(1), t(' \\right)') }),
+      sn(nil, { t('\\left{ '), util.input(1), t(' \\right}') }),
+      sn(nil, { t('\\left[ '), util.input(1), t(' \\right]') }),
     }),
   }, {
     condition = mathzone,

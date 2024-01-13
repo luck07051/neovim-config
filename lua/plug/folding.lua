@@ -5,6 +5,19 @@ return {
     'kevinhwang91/promise-async',
   },
 
+  keys = {
+    { 'zR', function() require('ufo').openAllFolds() end,         desc = 'ufo open all folds' },
+    { 'zM', function() require('ufo').closeAllFolds() end,        desc = 'ufo close all flods' },
+    { 'zr', function() require('ufo').openFoldsExceptKinds() end, desc = '' },
+    { 'zm', function() require('ufo').closeFoldsWith() end },
+
+    { '<enter>', function()
+      local winid = require('ufo').peekFoldedLinesUnderCursor()
+      if not winid then vim.lsp.buf.hover() end
+    end
+    },
+  },
+
   init = function()
     vim.opt.foldlevel = 9999
   end,
@@ -48,18 +61,5 @@ return {
       table.insert(newVirtText, { suffix, 'MoreMsg' })
       return newVirtText
     end
-  },
-
-  keys = {
-    { 'zR', function() require('ufo').openAllFolds() end,         desc = 'ufo open all folds' },
-    { 'zM', function() require('ufo').closeAllFolds() end,        desc = 'ufo close all flods' },
-    { 'zr', function() require('ufo').openFoldsExceptKinds() end, desc = '' },
-    { 'zm', function() require('ufo').closeFoldsWith() end },
-
-    { '<enter>', function()
-      local winid = require('ufo').peekFoldedLinesUnderCursor()
-      if not winid then vim.lsp.buf.hover() end
-    end
-    },
   },
 }
