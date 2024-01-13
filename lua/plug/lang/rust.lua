@@ -83,10 +83,7 @@ return {
       'rouge8/neotest-rust', -- $ cargo install cargo-nextest
     },
     opts = function(_, opts)
-      -- vim.list_extend(opts.adapters, require('neotest-rust'))
-      opts.adapters = {
-        require('neotest-rust'),
-      }
+      table.insert(opts.adapters, require('neotest-rust'))
     end
   },
 }

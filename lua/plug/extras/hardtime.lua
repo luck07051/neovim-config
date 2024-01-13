@@ -1,5 +1,6 @@
 return {
   'm4xshen/hardtime.nvim',
+  cond = false,
   -- event = 'VeryLazy',
   lazy = false,
   command = 'Hardtime',

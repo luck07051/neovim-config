@@ -71,6 +71,53 @@ au('TermOpen', {
 au('WinEnter', { command = 'setlocal cursorline' })
 au('WinLeave', { command = 'setlocal nocursorline' })
 
+-- Resize splits if window got resized
+au({ 'VimResized' }, {
+  group = ag('resize_splits', {}),
+  callback = function()
+    local current_tab = vim.fn.tabpagenr()
+    vim.cmd('tabdo wincmd =')
+    vim.cmd('tabnext ' .. current_tab)
+  end,
+})
+
+-- Close some filetypes with <q>
+au('FileType', {
+  group = ag('close_with_q', {}),
+  pattern = {
+    'PlenaryTestPopup',
+    'help',
+    'lspinfo',
+    'man',
+    'notify',
+    'qf',
+    'query',
+    'spectre_panel',
+    'startuptime',
+    'tsplayground',
+    'neotest-output',
+    'checkhealth',
+    'neotest-summary',
+    'neotest-output-panel',
+  },
+  callback = function(event)
+    vim.bo[event.buf].buflisted = false
+    vim.keymap.set('n', 'q', '<cmd>close<cr>', { buffer = event.buf, silent = true })
+  end,
+})
+
+-- Auto create dir when saving a file, in case some intermediate directory does not exist
+au({ 'BufWritePre' }, {
+  group = ag('auto_create_dir', {}),
+  callback = function(event)
+    if event.match:match('^%w%w+://') then
+      return
+    end
+    local file = vim.loop.fs_realpath(event.match) or event.match
+    vim.fn.mkdir(vim.fn.fnamemodify(file, ':p:h'), 'p')
+  end,
+})
+
 -- Correcting the filetype
 local function corrft(pattern, ft)
   au('BufEnter', {
