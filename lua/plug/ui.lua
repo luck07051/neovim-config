@@ -39,5 +39,11 @@ return {
         fat_headlines = false,
       }
     },
-  }
+  },
+
+  { -- Enhanced matchparen
+    'utilyre/sentiment.nvim',
+    event = 'VeryLazy',
+    opts = {},
+  },
 }

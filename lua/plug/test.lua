@@ -19,6 +19,10 @@ return {
 
     opts = {
       adapters = {},
+      status = {
+        virtual_text = true,
+        signs = false,
+      },
     },
 
     config = function(_, opts)
