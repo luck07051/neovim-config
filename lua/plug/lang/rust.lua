@@ -28,8 +28,12 @@ return {
             ['rust-analyzer'] = {
               checkOnSave = {
                 allFeatures = true,
-                command = "clippy",
-                extraArgs = { "--no-deps" },
+                command = 'clippy',
+                extraArgs = { '--no-deps', '--',
+                  '-W', 'clippy::pedantic',
+                  '-W', 'clippy::nursery',
+                  '-A', 'clippy::must_use_candidate',
+                },
               },
             },
           },
